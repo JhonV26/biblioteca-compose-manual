@@ -39,7 +39,6 @@ fun InicioScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Icono destacado
             Icon(
                 imageVector = Icons.Default.AutoStories,
                 contentDescription = "Logo Manga",
@@ -67,7 +66,6 @@ fun InicioScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(40.dp))
 
-            // Botón 1: Explorar Catálogo
             Button(
                 onClick = { navController.navigate(AppScreens.ListaLibros.route) },
                 modifier = Modifier
@@ -82,7 +80,6 @@ fun InicioScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Botón 2: Ver Reservas
             OutlinedButton(
                 onClick = { navController.navigate(AppScreens.MisReservas.route) },
                 modifier = Modifier

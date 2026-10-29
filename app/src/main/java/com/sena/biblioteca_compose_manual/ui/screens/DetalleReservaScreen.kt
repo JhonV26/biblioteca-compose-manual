@@ -53,7 +53,6 @@ fun DetalleReservaScreen(
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Tarjeta de información de la reserva
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
@@ -113,7 +112,6 @@ fun DetalleReservaScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Botón 1: Renovar Reserva (Navega con argumentos)
             Button(
                 onClick = {
                     navController.navigate(
@@ -133,7 +131,6 @@ fun DetalleReservaScreen(
                 Text("Renovar Préstamo de Tomo", fontSize = 16.sp)
             }
 
-            // Botón 2: Cancelar Reserva (Modo estático: solo vuelve atrás)
             OutlinedButton(
                 onClick = {
                     navController.popBackStack()

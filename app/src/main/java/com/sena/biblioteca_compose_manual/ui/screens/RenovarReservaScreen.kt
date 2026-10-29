@@ -25,7 +25,6 @@ fun RenovarReservaScreen(
     nombreLibro: String,
     codigoReserva: String
 ) {
-    // Estado para la nueva fecha de devolución
     var nuevaFecha by remember { mutableStateOf("15/11/2026") }
 
     Scaffold(
@@ -54,7 +53,6 @@ fun RenovarReservaScreen(
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Tarjeta resumen del préstamo actual
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
@@ -97,7 +95,6 @@ fun RenovarReservaScreen(
                 fontSize = 15.sp
             )
 
-            // Campo de texto para la nueva fecha
             OutlinedTextField(
                 value = nuevaFecha,
                 onValueChange = { nuevaFecha = it },
@@ -117,7 +114,6 @@ fun RenovarReservaScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Botón de confirmación (Modo estático: solo navega con parámetros)
             Button(
                 onClick = {
                     if (nuevaFecha.isNotBlank()) {

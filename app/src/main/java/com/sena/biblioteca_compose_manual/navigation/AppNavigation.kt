@@ -25,21 +25,14 @@ fun AppNavigation() {
         navController = navController,
         startDestination = AppScreens.InicioBiblioteca.route
     ) {
-        // ==========================================
-        // FLUJO 1: CATÁLOGO Y RESERVA DE MANGAS
-        // ==========================================
-
-        // 1. Portada de Inicio
         composable(route = AppScreens.InicioBiblioteca.route) {
             InicioScreen(navController = navController)
         }
 
-        // 2. Catálogo con LazyColumn
         composable(route = AppScreens.ListaLibros.route) {
             ListaLibrosScreen(navController = navController)
         }
 
-        // 3. Ficha Técnica del Manga (1 Parámetro: nombreLibro)
         composable(
             route = AppScreens.DetalleLibro.route,
             arguments = listOf(
@@ -51,7 +44,6 @@ fun AppNavigation() {
             DetalleLibroScreen(navController = navController, nombreLibro = nombreLibro)
         }
 
-        // 4. Ticket de Préstamo Exitoso (2 Parámetros: nombreLibro + fechaReserva)
         composable(
             route = AppScreens.ConfirmacionReserva.route,
             arguments = listOf(
@@ -71,16 +63,10 @@ fun AppNavigation() {
             )
         }
 
-        // ==========================================
-        // FLUJO 2: GESTIÓN Y RENOVACIÓN DE RESERVAS
-        // ==========================================
-
-        // 5. Lista de Reservas Activas
         composable(route = AppScreens.MisReservas.route) {
             MisReservasScreen(navController = navController)
         }
 
-        // 6. Gestión de Reserva (3 Parámetros: nombreLibro + fechaReserva + codigoReserva)
         composable(
             route = AppScreens.DetalleReserva.route,
             arguments = listOf(
@@ -104,7 +90,6 @@ fun AppNavigation() {
             )
         }
 
-        // 7. Formulario de Renovación (2 Parámetros: nombreLibro + codigoReserva)
         composable(
             route = AppScreens.RenovarReserva.route,
             arguments = listOf(
@@ -124,7 +109,6 @@ fun AppNavigation() {
             )
         }
 
-        // 8. Ticket de Renovación Exitosa (2 Parámetros: nombreLibro + fechaNueva)
         composable(
             route = AppScreens.RenovacionExitosa.route,
             arguments = listOf(
