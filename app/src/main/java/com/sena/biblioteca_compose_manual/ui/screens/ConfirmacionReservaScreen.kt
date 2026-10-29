@@ -44,12 +44,11 @@ fun ConfirmacionReservaScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Icono de confirmación
             Icon(
                 imageVector = Icons.Default.CheckCircle,
                 contentDescription = "Éxito",
                 modifier = Modifier.size(90.dp),
-                tint = Color(0xFF2E7D32) // Verde éxito
+                tint = Color(0xFF2E7D32)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -72,7 +71,6 @@ fun ConfirmacionReservaScreen(
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            // Tarjeta tipo comprobante / ticket
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
@@ -98,7 +96,6 @@ fun ConfirmacionReservaScreen(
 
             Spacer(modifier = Modifier.height(36.dp))
 
-            // Botón 1: Ir a Mis Reservas (Limpiando pantallas intermedias)
             Button(
                 onClick = {
                     navController.navigate(AppScreens.MisReservas.route) {
@@ -117,7 +114,6 @@ fun ConfirmacionReservaScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Botón 2: Volver al Inicio
             OutlinedButton(
                 onClick = {
                     navController.navigate(AppScreens.InicioBiblioteca.route) {

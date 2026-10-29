@@ -12,10 +12,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-/**
- * Componente modular reutilizable para mostrar portadas de manga
- * con esquinas redondeadas y escalado proporcional (ContentScale.Crop).
- */
 @Composable
 fun MangaCover(
     @DrawableRes imagenRes: Int,

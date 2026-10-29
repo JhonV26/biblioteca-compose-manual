@@ -24,7 +24,6 @@ fun DetalleLibroScreen(
     navController: NavController,
     nombreLibro: String
 ) {
-    // Buscamos el manga en la lista estática
     val manga = remember(nombreLibro) {
         listaMangas.find { it.titulo.equals(nombreLibro, ignoreCase = true) }
     }
@@ -58,7 +57,6 @@ fun DetalleLibroScreen(
                     .padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Tarjeta de información principal
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
@@ -70,7 +68,6 @@ fun DetalleLibroScreen(
                         modifier = Modifier.padding(20.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        // Portada grande destacada usando MangaCover
                         MangaCover(
                             imagenRes = manga.imagenRes,
                             contentDescription = manga.titulo,
@@ -109,7 +106,6 @@ fun DetalleLibroScreen(
                     }
                 }
 
-                // Selección de fecha de préstamo
                 Text(
                     text = "Fecha de inicio del préstamo:",
                     fontWeight = FontWeight.SemiBold,
@@ -129,7 +125,6 @@ fun DetalleLibroScreen(
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Botón para Confirmar Reserva (Navega pasando los parámetros)
                 Button(
                     onClick = {
                         if (fechaReserva.isNotBlank()) {

@@ -4,12 +4,10 @@ import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 sealed class AppScreens(val route: String) {
-    // Pantallas principales
     object InicioBiblioteca : AppScreens("inicio_biblioteca")
     object ListaLibros : AppScreens("lista_libros")
     object MisReservas : AppScreens("mis_reservas")
 
-    // Flujo 1: Mangas y Reserva
     object DetalleLibro : AppScreens("detalle_libro/{nombreLibro}") {
         fun createRoute(nombreLibro: String): String {
             val encoded = URLEncoder.encode(nombreLibro, StandardCharsets.UTF_8.toString())
@@ -25,7 +23,6 @@ sealed class AppScreens(val route: String) {
         }
     }
 
-    // Flujo 2: Gestión y Renovación de Reservas
     object DetalleReserva : AppScreens("detalle_reserva/{nombreLibro}/{fechaReserva}/{codigoReserva}") {
         fun createRoute(nombreLibro: String, fechaReserva: String, codigoReserva: String): String {
             val encodedLibro = URLEncoder.encode(nombreLibro, StandardCharsets.UTF_8.toString())

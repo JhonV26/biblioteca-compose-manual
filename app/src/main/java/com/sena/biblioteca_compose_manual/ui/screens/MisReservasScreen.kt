@@ -1,15 +1,11 @@
 package com.sena.biblioteca_compose_manual.ui.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.BookmarkBorder
-import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,15 +16,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.sena.biblioteca_compose_manual.navigation.AppScreens
+import com.sena.biblioteca_compose_manual.ui.section.ItemReservaSection
 
-// Modelo de datos simple para las reservas
 data class Reserva(
     val codigoReserva: String,
     val nombreLibro: String,
     val fechaReserva: String
 )
 
-// Lista estática fija de reservas de ejemplo
 val listaReservas = listOf(
     Reserva("ANI-101", "Shingeki no Kyojin", "28/10/2026"),
     Reserva("ANI-102", "Death Note", "30/10/2026"),
@@ -98,10 +93,9 @@ fun MisReservasScreen(navController: NavController) {
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 items(listaReservas) { reserva ->
-                    ItemReservaCard(
+                    ItemReservaSection(
                         reserva = reserva,
                         onClick = {
-                            // Navegación con 3 parámetros al detalle de la reserva
                             navController.navigate(
                                 AppScreens.DetalleReserva.createRoute(
                                     nombreLibro = reserva.nombreLibro,
@@ -113,62 +107,6 @@ fun MisReservasScreen(navController: NavController) {
                     )
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun ItemReservaCard(
-    reserva: Reserva,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { onClick() },
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                imageVector = Icons.Default.ConfirmationNumber,
-                contentDescription = null,
-                modifier = Modifier.size(36.dp),
-                tint = MaterialTheme.colorScheme.primary
-            )
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = reserva.nombreLibro,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(3.dp))
-                Text(
-                    text = "Código: ${reserva.codigoReserva}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = "Fecha: ${reserva.fechaReserva}",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
-                )
-            }
-
-            Icon(
-                imageVector = Icons.Default.ChevronRight,
-                contentDescription = "Gestionar reserva",
-                tint = MaterialTheme.colorScheme.outline
-            )
         }
     }
 }

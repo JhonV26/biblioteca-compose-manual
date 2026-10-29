@@ -44,7 +44,6 @@ fun RenovacionExitosaScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Icono de confirmación verde
             Icon(
                 imageVector = Icons.Default.CheckCircle,
                 contentDescription = "Éxito",
@@ -72,7 +71,6 @@ fun RenovacionExitosaScreen(
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            // Comprobante de renovación
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
@@ -98,7 +96,6 @@ fun RenovacionExitosaScreen(
 
             Spacer(modifier = Modifier.height(36.dp))
 
-            // Botón 1: Volver a Mis Reservas limpiando pantallas intermedias
             Button(
                 onClick = {
                     navController.navigate(AppScreens.MisReservas.route) {
@@ -117,7 +114,6 @@ fun RenovacionExitosaScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Botón 2: Ir a la Portada Principal
             OutlinedButton(
                 onClick = {
                     navController.navigate(AppScreens.InicioBiblioteca.route) {
