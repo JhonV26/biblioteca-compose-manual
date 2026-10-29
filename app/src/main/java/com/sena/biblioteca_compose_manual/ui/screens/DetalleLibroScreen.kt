@@ -6,7 +6,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,8 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.sena.biblioteca_compose_manual.data.repository.BibliotecaRepository
 import com.sena.biblioteca_compose_manual.navigation.AppScreens
+import com.sena.biblioteca_compose_manual.ui.components.MangaCover
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -25,8 +24,9 @@ fun DetalleLibroScreen(
     navController: NavController,
     nombreLibro: String
 ) {
+    // Buscamos el manga en la lista estática
     val manga = remember(nombreLibro) {
-        BibliotecaRepository.obtenerLibroPorNombre(nombreLibro)
+        listaMangas.find { it.titulo.equals(nombreLibro, ignoreCase = true) }
     }
 
     var fechaReserva by remember { mutableStateOf("29/10/2026") }
@@ -66,26 +66,30 @@ fun DetalleLibroScreen(
                         containerColor = MaterialTheme.colorScheme.surfaceVariant
                     )
                 ) {
-                    Column(modifier = Modifier.padding(20.dp)) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = Icons.Default.MenuBook,
-                                contentDescription = null,
-                                modifier = Modifier.size(32.dp),
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Text(
-                                text = manga.titulo,
-                                fontSize = 22.sp,
-                                fontWeight = FontWeight.ExtraBold
-                            )
-                        }
+                    Column(
+                        modifier = Modifier.padding(20.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        // Portada grande destacada usando MangaCover
+                        MangaCover(
+                            imagenRes = manga.imagenRes,
+                            contentDescription = manga.titulo,
+                            ancho = 120.dp,
+                            alto = 170.dp
+                        )
 
                         Spacer(modifier = Modifier.height(14.dp))
+
+                        Text(
+                            text = manga.titulo,
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.ExtraBold
+                        )
+
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text(text = "Mangaka / Autor: ${manga.autor}", fontSize = 16.sp)
-                        Spacer(modifier = Modifier.height(6.dp))
-                        Text(text = "Categoría: ${manga.categoria}", fontSize = 16.sp)
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(text = "Categoría: ${manga.categoria}", fontSize = 15.sp)
                         Spacer(modifier = Modifier.height(10.dp))
 
                         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -125,13 +129,10 @@ fun DetalleLibroScreen(
 
                 Spacer(modifier = Modifier.weight(1f))
 
-                // Botón para Confirmar Reserva
+                // Botón para Confirmar Reserva (Navega pasando los parámetros)
                 Button(
                     onClick = {
                         if (fechaReserva.isNotBlank()) {
-                            // 1. Guardar la reserva en el repositorio
-                            BibliotecaRepository.agregarReserva(manga.titulo, fechaReserva)
-                            // 2. Navegar a la pantalla de confirmación pasando libro y fecha
                             navController.navigate(
                                 AppScreens.ConfirmacionReserva.createRoute(manga.titulo, fechaReserva)
                             )

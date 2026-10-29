@@ -17,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.sena.biblioteca_compose_manual.data.repository.BibliotecaRepository
 import com.sena.biblioteca_compose_manual.navigation.AppScreens
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -114,7 +113,7 @@ fun DetalleReservaScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Botón 1: Renovar Reserva
+            // Botón 1: Renovar Reserva (Navega con argumentos)
             Button(
                 onClick = {
                     navController.navigate(
@@ -134,11 +133,9 @@ fun DetalleReservaScreen(
                 Text("Renovar Préstamo de Tomo", fontSize = 16.sp)
             }
 
-            // Botón 2: Cancelar Reserva
+            // Botón 2: Cancelar Reserva (Modo estático: solo vuelve atrás)
             OutlinedButton(
                 onClick = {
-                    // Eliminamos la reserva del repositorio y volvemos a la lista
-                    BibliotecaRepository.cancelarReserva(codigoReserva)
                     navController.popBackStack()
                 },
                 modifier = Modifier

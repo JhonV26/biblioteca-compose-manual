@@ -11,7 +11,7 @@ import androidx.compose.material.icons.filled.BookmarkBorder
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,16 +19,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.sena.biblioteca_compose_manual.data.model.Reserva
-import com.sena.biblioteca_compose_manual.data.repository.BibliotecaRepository
 import com.sena.biblioteca_compose_manual.navigation.AppScreens
+
+// Modelo de datos simple para las reservas
+data class Reserva(
+    val codigoReserva: String,
+    val nombreLibro: String,
+    val fechaReserva: String
+)
+
+// Lista estática fija de reservas de ejemplo
+val listaReservas = listOf(
+    Reserva("ANI-101", "Shingeki no Kyojin", "28/10/2026"),
+    Reserva("ANI-102", "Death Note", "30/10/2026"),
+    Reserva("ANI-103", "One Piece", "02/11/2026")
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MisReservasScreen(navController: NavController) {
-    // Obtenemos la lista actual de reservas
-    val reservas = remember { BibliotecaRepository.listaReservas }
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -48,7 +57,7 @@ fun MisReservasScreen(navController: NavController) {
             )
         }
     ) { innerPadding ->
-        if (reservas.isEmpty()) {
+        if (listaReservas.isEmpty()) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -88,7 +97,7 @@ fun MisReservasScreen(navController: NavController) {
                     .padding(horizontal = 16.dp, vertical = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                items(reservas) { reserva ->
+                items(listaReservas) { reserva ->
                     ItemReservaCard(
                         reserva = reserva,
                         onClick = {

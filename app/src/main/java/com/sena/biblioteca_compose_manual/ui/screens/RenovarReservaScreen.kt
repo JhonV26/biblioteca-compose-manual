@@ -16,7 +16,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.sena.biblioteca_compose_manual.data.repository.BibliotecaRepository
 import com.sena.biblioteca_compose_manual.navigation.AppScreens
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -118,14 +117,10 @@ fun RenovarReservaScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Botón de confirmación
+            // Botón de confirmación (Modo estático: solo navega con parámetros)
             Button(
                 onClick = {
                     if (nuevaFecha.isNotBlank()) {
-                        // 1. Actualizamos la reserva en el Singleton del repositorio
-                        BibliotecaRepository.renovarReserva(codigoReserva, nuevaFecha)
-
-                        // 2. Navegamos a la pantalla de éxito pasando los datos
                         navController.navigate(
                             AppScreens.RenovacionExitosa.createRoute(
                                 nombreLibro = nombreLibro,
